@@ -1,6 +1,7 @@
 #include "WinEasy.h"
 #include <stdio.h>
 
+int x = 200;
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 
@@ -17,7 +18,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             {
                 //R
                 case 0x52:
-                    //printf("R");
+                    printf("R");
+                    x += 20;
                     break;
                 default:
                     break;
@@ -29,7 +31,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             WinEasyStartPaint(&p, &hwnd);
 
             WinEasyDrawBackground(p.backHDC, colors[DARK_GRAY], p.windowRect);
-            WinEasyDrawCircle(p.backHDC, colors[GREEN], 200, 400, 10);
+            WinEasyDrawCircle(p.backHDC, colors[GREEN], x, 400, 10);
+            WinEasyDrawText(p.backHDC, colors[BLACK], "Hec", 300,300);
 
             WinEasyEndPaint(&p, hwnd);
         break;
@@ -49,7 +52,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     WinEasyCreateWindowClass(&wc, hInstance, &WndProc, ClassName, (HBRUSH)(COLOR_WINDOW-1));
 
-    WinEasyCreateWindow(&hwnd, "WinEasy Test", ClassName, hInstance, 800, 600, 500, 200);
+    WinEasyCreateWindow(&hwnd, "Hec", ClassName, hInstance, 800, 600, 500, 200);
 
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
